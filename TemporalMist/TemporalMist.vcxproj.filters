@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\StateManager">
+      <UniqueIdentifier>{9e417ff2-ca93-472f-a424-85c036096bd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Rendering">
+      <UniqueIdentifier>{2cff4c36-1bd3-4caf-98b4-8c0a1af7d2ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Pathfinder">
+      <UniqueIdentifier>{83f8b1a6-36e7-4a1b-af30-b718f9449da8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Math">
+      <UniqueIdentifier>{8b8c59ea-2c8a-45c1-a160-2d217278d1b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game">
+      <UniqueIdentifier>{32b2549e-2b6e-4a7e-90de-5d6a3a14a64e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MapLoader">
+      <UniqueIdentifier>{fdc216f3-4a41-445d-a956-8642369f3188}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\StateManager">
+      <UniqueIdentifier>{87a73af7-f1bf-4494-a801-feedd60ad4ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Rendering">
+      <UniqueIdentifier>{8007b2a3-0ee9-4d2e-9c1e-5e68d82c2499}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Pathfinder">
+      <UniqueIdentifier>{0287a2f5-d478-437c-bf3e-7751857300f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Math">
+      <UniqueIdentifier>{0e76be85-3b9a-4f54-b9ff-ceae2f0ce68c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MapLoader">
+      <UniqueIdentifier>{5c53652f-d357-4785-b9e5-09dfa3433b8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{bda359da-fe7c-4912-b909-5b07aee6979a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\StateManager\States">
+      <UniqueIdentifier>{89186bd9-5e41-4a30-a010-9cc5c5a818d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\StateManager\States">
+      <UniqueIdentifier>{4a6b0780-a4b5-4442-8a22-db9f657aa1fd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameplayState.cpp">
+      <Filter>Source Files\StateManager\States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\StateManager.cpp">
+      <Filter>Source Files\StateManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Pathfinder.cpp">
+      <Filter>Source Files\Pathfinder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Map.cpp">
+      <Filter>Source Files\MapLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Game.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\Camera.hpp">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Player.hpp">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Layer.hpp">
+      <Filter>Header Files\MapLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Map.hpp">
+      <Filter>Header Files\MapLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Tile.hpp">
+      <Filter>Header Files\MapLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Tileset.hpp">
+      <Filter>Header Files\MapLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Matrix.hpp">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Quaternion.hpp">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Vector2.hpp">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Vector3.hpp">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Path.hpp">
+      <Filter>Header Files\Pathfinder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Pathfinder.hpp">
+      <Filter>Header Files\Pathfinder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\StateManager.hpp">
+      <Filter>Header Files\StateManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\GameplayState.hpp">
+      <Filter>Header Files\StateManager\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\GameState.hpp">
+      <Filter>Header Files\StateManager\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Game.hpp">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\GameSettings.hpp">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
