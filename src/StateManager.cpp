@@ -19,6 +19,11 @@ StateManager::~StateManager()
 	states.clear();
 }
 
+void StateManager::OnEvent(const sf::Event& ev)
+{
+
+}
+
 void StateManager::Update(unsigned int timestep)
 {
 	// Skip updating if we have no states to update.

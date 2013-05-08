@@ -4,6 +4,7 @@
 #include <GameState.hpp>
 
 #include <Camera.hpp>
+#include <Shader.hpp>
 #include <Player.hpp>
 
 class GameplayState
@@ -20,6 +21,7 @@ public:
 private:
 	Camera mainCamera;
 	Matrix projectionMatrix;
+	Shader basicShader;
 
 	Player player;
 };
