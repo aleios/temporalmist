@@ -113,9 +113,13 @@ Map::~Map()
 
 void Map::Draw()
 {
-	
+	for(unsigned int i = 0; i < layers.size(); i++)
+	{
+		DrawLayer(i);
+	}
 }
 
 void Map::DrawLayer(int index)
 {
+
 }

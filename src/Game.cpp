@@ -1,10 +1,12 @@
 #include <Game.hpp>
+#include <GL/glew.h>
 #include <SFML/OpenGL.hpp>
 #include <GameplayState.hpp>
 
 Game::Game(const GameSettings& inSettings)
 	: settings(inSettings), stateManager(inSettings), quitting(false)
 {
+	glewInit();
 }
 
 Game::~Game()
@@ -59,6 +61,8 @@ void Game::Update(unsigned int timestep)
 	{
 		if(ev.type == sf::Event::Closed)
 			quitting = true;
+
+		stateManager.OnEvent(ev);
 	}
 }
 

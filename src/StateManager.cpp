@@ -21,7 +21,9 @@ StateManager::~StateManager()
 
 void StateManager::OnEvent(const sf::Event& ev)
 {
-
+	if(states.size() < 1)
+		return;
+	states[states.size() - 1]->OnEvent(ev);
 }
 
 void StateManager::Update(unsigned int timestep)

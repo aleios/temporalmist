@@ -1,4 +1,5 @@
 #include <GameplayState.hpp>
+#include <GL/glew.h>
 #include <SFML/OpenGL.hpp>
 
 GameplayState::GameplayState()
@@ -17,17 +18,21 @@ void GameplayState::OnCreate(const GameSettings& inSettings)
 
 	// Setup the projection matrix and the viewport.
 	glViewport(0, 0, inSettings.windowSettings.width, inSettings.windowSettings.height);
-
 	projectionMatrix = Matrix::CreateIdentity() * Matrix::OrthoProjection(0, inSettings.windowSettings.width, inSettings.windowSettings.height, 0, -1, 1);
 
+	// Load the basic shader.
+	basicShader.Load("assets/shaders/basic.vert", "assets/shaders/basic.frag");
 	basicShader.Bind();
 	basicShader.SetParameter("projectionMatrix", &projectionMatrix[0][0]);
 
 	// Setup the player with their texture.
 	sf::Texture tex;
-	tex.loadFromFile("player.png");
+	tex.loadFromFile("assets/textures/player.png");
 
-	
+}
+
+void GameplayState::OnEvent(const sf::Event& ev)
+{
 }
 
 void GameplayState::Update(unsigned int timestep)

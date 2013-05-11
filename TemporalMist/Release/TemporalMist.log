@@ -1,26 +1,29 @@
-﻿Build started 8/05/2013 12:55:35 PM.
-     1>Project "F:\TemporalMist\Proper\TemporalMist\TemporalMist\TemporalMist.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\src\Game.cpp ..\src\GameplayState.cpp ..\src\main.cpp ..\src\Map.cpp ..\src\Pathfinder.cpp ..\src\StateManager.cpp
-         Game.cpp
-         GameplayState.cpp
-     1>..\src\GameplayState.cpp(21): warning C4244: 'argument' : conversion from 'const unsigned int' to 'float', possible loss of data
-         main.cpp
+﻿Build started 5/11/2013 7:07:39 PM.
+     1>Project "C:\Users\Alex\Desktop\GameDesign\temporalmist\TemporalMist\TemporalMist.vcxproj" on node 2 (Build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Release\TemporalMist.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D GLEW_STATIC /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\src\Map.cpp
          Map.cpp
-         Pathfinder.cpp
-         StateManager.cpp
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\TemporalMist\Proper\TemporalMist\Release\TemporalMist.exe" /NOLOGO "sfml-main.lib" "sfml-system.lib" "sfml-window.lib" "sfml-graphics.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib OPENGL32.lib GLU32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\TemporalMist\Proper\TemporalMist\Release\TemporalMist.pdb" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\TemporalMist\Proper\TemporalMist\Release\TemporalMist.lib" /MACHINE:X86 /SAFESEH Release\Game.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Alex\Desktop\GameDesign\temporalmist\Release\TemporalMist.exe" /NOLOGO "sfml-main.lib" "sfml-system.lib" "sfml-window.lib" "sfml-graphics.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib OPENGL32.lib GLU32.lib glew32s.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Alex\Desktop\GameDesign\temporalmist\Release\TemporalMist.pdb" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Alex\Desktop\GameDesign\temporalmist\Release\TemporalMist.lib" /MACHINE:X86 /SAFESEH Release\Game.obj
          Release\GameplayState.obj
+         Release\Layer.obj
          Release\main.obj
          Release\Map.obj
          Release\Pathfinder.obj
+         Release\Shader.obj
          Release\StateManager.obj
+     1>LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
          Generating code
          Finished generating code
-         TemporalMist.vcxproj -> F:\TemporalMist\Proper\TemporalMist\Release\TemporalMist.exe
-     1>Done Building Project "F:\TemporalMist\Proper\TemporalMist\TemporalMist\TemporalMist.vcxproj" (Build target(s)).
+     1>glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Users\Alex\Desktop\GameDesign\temporalmist\Release\vc100.pdb'; linking object as if no debug info
+         TemporalMist.vcxproj -> C:\Users\Alex\Desktop\GameDesign\temporalmist\Release\TemporalMist.exe
+       FinalizeBuildStatus:
+         Deleting file "Release\TemporalMist.unsuccessfulbuild".
+         Touching "Release\TemporalMist.lastbuildstate".
+     1>Done Building Project "C:\Users\Alex\Desktop\GameDesign\temporalmist\TemporalMist\TemporalMist.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:20.61
+Time Elapsed 00:00:01.23

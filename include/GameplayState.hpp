@@ -15,6 +15,7 @@ public:
 	~GameplayState();
 
 	void OnCreate(const GameSettings& inSettings);
+	void OnEvent(const sf::Event& ev);
 	void Update(unsigned int timestep);
 	void Draw(float delta);
 	void OnDestroy();

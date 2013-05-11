@@ -1,6 +1,7 @@
 #ifndef GAMESTATE_HPP
 #define GAMESTATE_HPP
 
+#include <SFML/Window/Event.hpp>
 #include <GameSettings.hpp>
 
 class GameState
@@ -16,6 +17,7 @@ public:
 	}
 
 	virtual void OnCreate(const GameSettings& inSettings) = 0;
+	virtual void OnEvent(const sf::Event& ev) = 0;
 	virtual void Update(unsigned int timestep) = 0;
 	virtual void Draw(float delta) = 0;
 	virtual void OnDestroy() = 0;

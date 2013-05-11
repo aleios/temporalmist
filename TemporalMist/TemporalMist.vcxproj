@@ -50,6 +50,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -62,6 +63,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -73,18 +75,23 @@
   <ItemGroup>
     <ClCompile Include="..\src\Game.cpp" />
     <ClCompile Include="..\src\GameplayState.cpp" />
+    <ClCompile Include="..\src\IndexBufferObject.cpp" />
+    <ClCompile Include="..\src\Layer.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\Map.cpp" />
     <ClCompile Include="..\src\Pathfinder.cpp" />
     <ClCompile Include="..\src\Shader.cpp" />
     <ClCompile Include="..\src\StateManager.cpp" />
+    <ClCompile Include="..\src\VertexBufferObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Camera.hpp" />
+    <ClInclude Include="..\include\Color.hpp" />
     <ClInclude Include="..\include\Game.hpp" />
     <ClInclude Include="..\include\GameplayState.hpp" />
     <ClInclude Include="..\include\GameSettings.hpp" />
     <ClInclude Include="..\include\GameState.hpp" />
+    <ClInclude Include="..\include\IndexBufferObject.hpp" />
     <ClInclude Include="..\include\Layer.hpp" />
     <ClInclude Include="..\include\Map.hpp" />
     <ClInclude Include="..\include\Matrix.hpp" />
@@ -98,6 +105,8 @@
     <ClInclude Include="..\include\Tileset.hpp" />
     <ClInclude Include="..\include\Vector2.hpp" />
     <ClInclude Include="..\include\Vector3.hpp" />
+    <ClInclude Include="..\include\Vertex.hpp" />
+    <ClInclude Include="..\include\VertexBufferObject.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

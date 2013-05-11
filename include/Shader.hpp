@@ -9,10 +9,13 @@ class Shader
 {
 public:
 	Shader();
+	Shader(const std::string& vertFilename, const std::string& fragFilename);
 	~Shader();
 
 	void Bind();
 	void Unbind();
+
+	void Load(const std::string& vertFilename, const std::string& fragFilename);
 
 	GLuint GetParameterLocation(const std::string& name) const;
 	GLuint GetAttributeLocation(const std::string& name) const;
@@ -26,7 +29,8 @@ public:
 private:
 	GLuint programID, vertID, fragID;
 
-	std::string ReadFile(const std::string& filename) const;
+	std::string Shader::ReadShader(const std::string& filename) const;
+	void Unload();
 };
 
 #endif
