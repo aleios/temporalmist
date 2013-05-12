@@ -20,9 +20,10 @@ void Game::Run()
 	stateManager.AddState(gstate);
 
 	// Create the main window and activate the context.
-	mainWindow.create(settings.windowSettings, settings.title);
+	mainWindow.create(settings.windowSettings, settings.title, 7U, sf::ContextSettings(0, 0, 0, 4, 3));
 	mainWindow.setFramerateLimit(0);
 	mainWindow.setActive();
+	mainWindow.pushGLStates();
 
 	// Setup the timing.
 	float ticks = 1000.0f / (float)settings.framerate;

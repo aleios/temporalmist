@@ -5,6 +5,7 @@
 #include <vector>
 
 #include <rapidxml.hpp>
+#include <zlib.h>
 
 #include <Layer.hpp>
 #include <Tileset.hpp>
@@ -22,6 +23,8 @@ public:
 	std::vector<Tileset> tilesets;
 private:
 	rapidxml::xml_document<> mapXML;
+
+	std::string UncompressData(std::string data);
 
 	unsigned int width, height, tileWidth, tileHeight;
 };

@@ -87,6 +87,9 @@
     <ClCompile Include="..\src\IndexBufferObject.cpp">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\base64.cpp">
+      <Filter>Source Files\MapLoader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Camera.hpp">
@@ -154,6 +157,9 @@
     </ClInclude>
     <ClInclude Include="..\include\IndexBufferObject.hpp">
       <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\base64.h">
+      <Filter>Header Files\MapLoader</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

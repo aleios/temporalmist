@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="120" height="25" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="controlset" tilewidth="32" tileheight="32">
+  <image source="F:/Coding/TMIST/controlset.png" width="96" height="32"/>
+ </tileset>
+ <tileset firstgid="4" name="Example" tilewidth="32" tileheight="32">
+  <image source="F:/Coding/TMIST/exampleset.png" width="96" height="32"/>
+ </tileset>
+ <layer name="Background" width="120" height="25">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3aSQqAMBAAQQ/+/83exYtLRmiqwA9MkwQStw0o2X/6mPHHrPWdo2+bvm36tunbpm+bvm36tq2e9dWdhr5z7sz6qzsofefYn9v0bdO37e05+uSdSN851m/bedYTb7b6zrF+2/Rt838OAKx1ACWcOUPgLgAA
+  </data>
+ </layer>
+ <layer name="Mid" width="120" height="25">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3RQREAAAjDsL3wLxkDKBjJXRU0AQAAAAAAAACg2RzRw99u/gIA3yx3U2mB4C4AAA==
+  </data>
+ </layer>
+ <layer name="Foreground" width="120" height="25">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3OMQoAIBADwWvy/y/bitjKwTkDW6VJFQAAAAAAAAAAU6T7AM9ki1ly6dwBAH6xAE7UbWXgLgAA
+  </data>
+ </layer>
+ <layer name="Control" width="120" height="25">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3awQqDMBREUdv+/z+76kYsEpuMMJwDbiO8C0aM2wY0eT10kfHErPXN0bebvt307aZvN3276dtN3253Zv0ZXP/4TUPfnJFZz/oGpW+O53M3fbutmPXV/qxvzr/76J1zIn1zfs165B151j2Z7zjrxJmtvjner7p9Z/1etP7Zc17fHP/nAMBaO6ZjaeTgLgAA
+  </data>
+ </layer>
+</map>
