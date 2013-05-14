@@ -1,7 +1,9 @@
 #include <Shader.hpp>
 #include <fstream>
+#include <iostream>
 
 Shader::Shader()
+	: programID(0), vertID(0), fragID(0)
 {
 }
 
@@ -60,7 +62,21 @@ void Shader::Load(const std::string& vertFilename, const std::string& fragFilena
 
 	// Compile the shaders.
 	glCompileShader(vertID);
+	
+#ifdef _DEBUG
+	char vertLog[2048];
+	glGetShaderInfoLog(vertID, 2048, NULL, vertLog);
+	std::cout << "Vertex Shader Status: \n" << vertLog << "\n";
+#endif
+	
+
 	glCompileShader(fragID);
+
+#ifdef _DEBUG
+	char fragLog[2048];
+	glGetShaderInfoLog(fragID, 2048, NULL, fragLog);
+	std::cout << "Fragment Shader Status: \n" << fragLog << "\n";
+#endif
 
 	// Attach the shaders.
 	glAttachShader(programID, vertID);
@@ -68,6 +84,12 @@ void Shader::Load(const std::string& vertFilename, const std::string& fragFilena
 
 	// Link the shaders.
 	glLinkProgram(programID);
+
+#ifdef _DEBUG
+	char progLog[2048];
+	glGetProgramInfoLog(programID, 2048, 0, progLog);
+	std::cout << "Shader Program Status: \n" << progLog << "\n";
+#endif
 }
 
 void Shader::Unload()

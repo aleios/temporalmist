@@ -13,13 +13,16 @@
 class Map
 {
 public:
+	Map();
 	Map(const std::string& inFilename);
 	~Map();
+
+	void Load(const std::string& inFilename);
 
 	void Draw();
 	void DrawLayer(int index);
 
-	std::vector<Layer> layers;
+	std::vector<Layer*> layers;
 	std::vector<Tileset> tilesets;
 private:
 	rapidxml::xml_document<> mapXML;

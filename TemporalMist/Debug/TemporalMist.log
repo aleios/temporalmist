@@ -1,13 +1,33 @@
-﻿Build started 5/12/2013 11:40:16 PM.
-     1>Project "C:\Users\Alex\Desktop\GameDesign\temporalmist\TemporalMist\TemporalMist.vcxproj" on node 2 (Build target(s)).
-     1>InitializeBuildStatus:
-         Creating "Debug\TemporalMist.unsuccessfulbuild" because "AlwaysCreate" was specified.
-       ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D GLEW_STATIC /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\src\Map.cpp
+﻿Build started 14/05/2013 11:47:08 AM.
+     1>Project "F:\TemporalMist\Proper\temporalmist\TemporalMist\TemporalMist.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\src\GameplayState.cpp ..\src\Layer.cpp ..\src\Map.cpp
+         Layer.cpp
+     1>f:\temporalmist\proper\temporalmist\src\layer.cpp(56): warning C4018: '<' : signed/unsigned mismatch
+     1>f:\temporalmist\proper\temporalmist\src\layer.cpp(80): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>f:\temporalmist\proper\temporalmist\src\layer.cpp(86): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>f:\temporalmist\proper\temporalmist\src\layer.cpp(86): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
+     1>f:\temporalmist\proper\temporalmist\src\layer.cpp(92): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
+     1>f:\temporalmist\proper\temporalmist\src\layer.cpp(98): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
+     1>f:\temporalmist\proper\temporalmist\src\layer.cpp(98): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+         GameplayState.cpp
+     1>f:\temporalmist\proper\temporalmist\src\gameplaystate.cpp(29): warning C4244: 'argument' : conversion from 'const unsigned int' to 'float', possible loss of data
+     1>f:\temporalmist\proper\temporalmist\src\gameplaystate.cpp(53): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>f:\temporalmist\proper\temporalmist\src\gameplaystate.cpp(59): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>f:\temporalmist\proper\temporalmist\src\gameplaystate.cpp(65): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>f:\temporalmist\proper\temporalmist\src\gameplaystate.cpp(71): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>f:\temporalmist\proper\temporalmist\src\gameplaystate.cpp(78): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>f:\temporalmist\proper\temporalmist\src\gameplaystate.cpp(84): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>f:\temporalmist\proper\temporalmist\src\gameplaystate.cpp(90): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>f:\temporalmist\proper\temporalmist\src\gameplaystate.cpp(96): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+         Generating Code...
+         Compiling...
          Map.cpp
-     1>c:\users\alex\desktop\gamedesign\temporalmist\include\layer.hpp(39): warning C4018: '<' : signed/unsigned mismatch
+     1>f:\temporalmist\proper\temporalmist\src\map.cpp(107): warning C4018: '<' : signed/unsigned mismatch
+     1>f:\temporalmist\proper\temporalmist\src\map.cpp(249): warning C4018: '>' : signed/unsigned mismatch
+         Generating Code...
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Alex\Desktop\GameDesign\temporalmist\Debug\TemporalMist.exe" /INCREMENTAL /NOLOGO zlib.lib "sfml-main-d.lib" "sfml-system-d.lib" "sfml-window-d.lib" "sfml-graphics-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib OPENGL32.lib GLU32.lib glew32s.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Alex\Desktop\GameDesign\temporalmist\Debug\TemporalMist.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Alex\Desktop\GameDesign\temporalmist\Debug\TemporalMist.lib" /MACHINE:X86 Debug\base64.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\TemporalMist\Proper\temporalmist\Debug\TemporalMist.exe" /INCREMENTAL /NOLOGO zlib.lib "sfml-main-d.lib" "sfml-system-d.lib" "sfml-window-d.lib" "sfml-graphics-d.lib" OPENGL32.lib GLU32.lib glew32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\TemporalMist\Proper\temporalmist\Debug\TemporalMist.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\TemporalMist\Proper\temporalmist\Debug\TemporalMist.lib" /MACHINE:X86 Debug\base64.obj
          Debug\Game.obj
          Debug\GameplayState.obj
          Debug\IndexBufferObject.obj
@@ -18,14 +38,9 @@
          Debug\Shader.obj
          Debug\StateManager.obj
          Debug\VertexBufferObject.obj
-     1>LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
-     1>glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Users\Alex\Desktop\GameDesign\temporalmist\Debug\vc100.pdb'; linking object as if no debug info
-         TemporalMist.vcxproj -> C:\Users\Alex\Desktop\GameDesign\temporalmist\Debug\TemporalMist.exe
-       FinalizeBuildStatus:
-         Deleting file "Debug\TemporalMist.unsuccessfulbuild".
-         Touching "Debug\TemporalMist.lastbuildstate".
-     1>Done Building Project "C:\Users\Alex\Desktop\GameDesign\temporalmist\TemporalMist\TemporalMist.vcxproj" (Build target(s)).
+         TemporalMist.vcxproj -> F:\TemporalMist\Proper\temporalmist\Debug\TemporalMist.exe
+     1>Done Building Project "F:\TemporalMist\Proper\temporalmist\TemporalMist\TemporalMist.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:02.01
+Time Elapsed 00:00:49.96

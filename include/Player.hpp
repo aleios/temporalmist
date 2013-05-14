@@ -15,14 +15,25 @@ public:
 	{
 	}
 
-	void SetPosition(const Vector2& inPosition, bool inRelative)
+	void SetPosition(const Vector2& inPosition, bool inRelative = false)
 	{
-		position = inPosition;
+		if(!inRelative)
+			position = inPosition;
+		else
+			position += inPosition;
 	}
-	void SetPosition(float X, float Y, bool inRelative)
+	void SetPosition(float X, float Y, bool inRelative = false)
 	{
-		position.x = X;
-		position.y = Y;
+		if(!inRelative)
+		{
+			position.x = X;
+			position.y = Y;
+		}
+		else
+		{
+			position.x += X;
+			position.y += Y;
+		}
 	}
 
 	const Vector2& GetPosition() const
@@ -40,12 +51,12 @@ public:
 		return position.y;
 	}
 
-	void SetVelocity(const Vector2& inVelocity, bool inRelative)
+	void SetVelocity(const Vector2& inVelocity, bool inRelative = false)
 	{
 		velocity = inVelocity;
 	}
 
-	void SetVelocity(float X, float Y, bool inRelative)
+	void SetVelocity(float X, float Y, bool inRelative = false)
 	{
 		velocity.x = X;
 		velocity.y = Y;

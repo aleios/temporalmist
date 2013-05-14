@@ -6,6 +6,10 @@
 
 struct GameSettings
 {
+	GameSettings()
+	{
+	}
+
 	GameSettings(const sf::VideoMode& inWindowSettings, const std::string& inTitle = "", float inFramerate = 60.0f, float inFrameskip = 5.0f)
 		: windowSettings(inWindowSettings), title(inTitle), framerate(inFramerate), frameskip(inFrameskip)
 	{

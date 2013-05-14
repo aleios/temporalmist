@@ -1,0 +1,21 @@
+<map version="1.0" orientation="orthogonal" width="50" height="20" tilewidth="32" tileheight="32">
+	<tileset firstgid="1" name="exampleset" tilewidth="32" tileheight="32">
+		<image source="F:/Coding/TMIST/exampleset.png" width="96" height="32"/>
+	</tileset>
+	<tileset firstgid="4" name="controlset" tilewidth="32" tileheight="32">
+		<image source="F:/Coding/TMIST/controlset.png" width="96" height="32"/>
+	</tileset>
+	<layer name="Background" width="50" height="20">
+		<data>eJyV1U1KQ0EQhdGxWUV4G9Cqyi8YN6NBAoGABty+KHSDI+uMksDH5ZFD91s9PN8v1/P6/fJ2WmJZ//z4PN9/v7/erqflaVl/3L5+Ph9fVv/FIXFKXBJvJN5KvJN4L/FB4iOhGCEZBiEGKQYxBjkGQQZJBlEGWSZZpp1HskyyTLJMskyyTLJMskyyLLIssiy7XMmyyLLIssiyyLLIsshyUAZNt+oxnTTdqsd00XSrHtMbmm7VY3pL0616TO9oulWP6T1Nt+oxfaDpVj2mjzTdqueRsePYy+c4Hkg6kWFHspfP8dYxm+/VZr61fGf53vKD5UfKy/7I+Xpt5mm5Pft8dLs9e/kct/uzl89xu0F7+Ry3O7SXz3G7RXv5HG/djEF1Ul1Ub6jeUr2jek/1geqj6SCmaYZxhnmGgYaJhpGGmYahhqmmqaappqmmqaappqmmqaappqmmqZaplqkWXr2mWqZaplqmWqZaplp/VVffb4A3Ug==</data>
+	</layer>
+	<layer name="Middle" width="50" height="20">
+		<data>eJzj4rQpycxJVUjPTLFVMlJSAHGKU0tslQyVFJLzc2yVzJQUivLLgXwzJX07LkKqzUlSbQpTbU6MajOSVJuTpNqCJNUmMNUWJPmSKNVmJKk2J0m1BUmqLVFUcwEARXSYgw==</data>
+	</layer>
+	<layer name="Foreground" width="50" height="20">
+		<data>eJzjAgAACwAL</data>
+	</layer>
+	<layer name="Control" width="50" height="20" opacity="0.2">
+		<data>eJyV1l1KA0EQReFnZxVDb0Bv1fTPQMbNaJBAIKABty956AkyZqzzJMLhEvyojsPT4Xo6H8eP0/uSpjTefvk6XpdkaXy7nJf0ksbPy/ft5/Pr8F8sEhuJncQTiTOJC4kriRuJZ4TCCJGhEKKQohCjkKMQpJCkEKWQpSFLY/eILA1ZGrI0ZGnI0pClIUtDlo4sHVk6e1yRpSNLR5aOLB1ZOrJ0ZNkphaZDdZ82NB2q+7Sj6VDdpyc0Har7dEbTobpPFzQdqvt0RdOhuk83NB2q+/SMpkP1ejLsHGP5Og4PEl2kNkdW9r5Ctvn+Z0EnLHbDsXwdZ1ccy9fxzWXmnX+8t/X+R0Fnr9AlF1RXVN8/OHpUFHonMqoLqiuqG6rvfxT0HCr0wk2ozqguqK6obqieH9Z/PllC4/54fdcn9DUhVBuqHdUTqjOqC6orqhuqZ6YDMZmmGKeYpxiomKgYqZipGKqYqjFVgzfKVI2pGlM1pmpM1ZiqMVVjqs5Unak6U3Wm6kzVmaozVWeqzlT9t+rwA2zqhF8=</data>
+	</layer>
+</map>
+

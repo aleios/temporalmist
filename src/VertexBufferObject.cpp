@@ -3,8 +3,12 @@
 
 VertexBufferObject::VertexBufferObject()
 {
+	//vaoID = 0;
+	//vboID = 0;
 	glGenVertexArrays(1, &vaoID);
 	glGenBuffers(1, &vboID);
+
+	std::cout << "Generated a VAO and VBO with ID: " << vaoID << ", " << vboID << "\n";
 }
 
 VertexBufferObject::VertexBufferObject(const std::vector<Vertex>& vertices, GLenum usage)
@@ -34,6 +38,9 @@ void VertexBufferObject::Clear(GLenum usage)
 void VertexBufferObject::SetData(const std::vector<Vertex>& vertices, GLenum usage)
 {
 	vertexCount = vertices.size();
+	if(vertexCount < 1)
+		return;
+
 	// Bind the Vertex Array Object
 	glBindVertexArray(vaoID);
 

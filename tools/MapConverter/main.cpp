@@ -10,7 +10,13 @@
 #include <zlib.h>
 #include "base64.h"
 
-unsigned int mapWidth, mapHeight;
+unsigned int mapWidth, mapHeight, tileWidth, tileHeight;
+
+struct Tileset
+{
+	int gidstart;
+	int gidend;
+};
 
 std::string CompressLayer(std::string layerData)
 {
@@ -63,6 +69,70 @@ std::string CompressLayer(std::string layerData)
 	return compressedString;
 }
 
+void LoadTilesets(rapidxml::xml_node<>* mapNode, std::vector<Tileset>& tilesets)
+{
+	// Run over each tileset and shove their start and end values into the vector.
+	rapidxml::xml_node<>* tilesetNode = mapNode->first_node("tileset", 0, false);
+
+	while(tilesetNode != 0)
+	{
+		// Get the size of each tile.
+		rapidxml::xml_attribute<>* attrGID = tilesetNode->first_attribute("firstgid", 0, false);
+		rapidxml::xml_attribute<>* attrTilewidth = tilesetNode->first_attribute("tilewidth", 0, false);
+		rapidxml::xml_attribute<>* attrTileheight = tilesetNode->first_attribute("tilewidth", 0, false);
+
+		int firstGID = (int)strtol(attrGID->value(), 0, 10);
+		int tileWidth = (int)strtol(attrTilewidth->value(), 0, 10);
+		int tileHeight = (int)strtol(attrTileheight->value(), 0, 10);
+
+		// Get the size of the tilesheet.
+		rapidxml::xml_node<>* imageNode = tilesetNode->first_node("image", 0, false);
+
+		rapidxml::xml_attribute<>* attrWidth = imageNode->first_attribute("width", 0, false);
+		rapidxml::xml_attribute<>* attrHeight = imageNode->first_attribute("height", 0, false);
+
+		int width = (int)strtol(attrWidth->value(), 0, 10);
+		int height = (int)strtol(attrHeight->value(), 0, 10);
+
+		// Calculate the number of tiles in the set.
+		int cols = (width / tileWidth);
+		int rows = (height / tileHeight);
+		int total = cols * rows;
+
+		// Add the tileset to the vector.
+		Tileset tileset;
+		tileset.gidstart = firstGID;
+		tileset.gidend = (firstGID + total) - 1;
+
+		tilesets.push_back(tileset);
+
+		// Get our next node.
+		tilesetNode = tilesetNode->next_sibling("tileset", 0, false);
+	}
+}
+
+unsigned int GetTilesetID(std::vector<Tileset>& tilesets, unsigned int gid)
+{
+	if(gid == 0)
+		return 0;
+
+	for(int i = 0; i < tilesets.size(); i++)
+	{
+		Tileset tileset = tilesets[i];
+
+		if(gid >= tileset.gidstart && gid <= tileset.gidend)
+			return i + 1;
+	}
+
+	return 0;
+}
+
+char* int2char(rapidxml::xml_document<>* doc, int value) {
+    char tmpval[64];
+    sprintf(tmpval,"%i",value);
+    return doc->allocate_string(tmpval);
+}
+
 int main(int argc, char** argv)
 {
 	std::string filename = "";
@@ -99,18 +169,82 @@ int main(int argc, char** argv)
 
 	rapidxml::xml_node<>* mapNode = mapDoc.first_node("map", 0, false);
 
+	// Load the map attributes
 	rapidxml::xml_attribute<>* attrWidth = mapNode->first_attribute("width", 0, false);
 	rapidxml::xml_attribute<>* attrHeight = mapNode->first_attribute("height", 0, false);
+	rapidxml::xml_attribute<>* attrTileWidth = mapNode->first_attribute("tilewidth", 0, false);
+	rapidxml::xml_attribute<>* attrTileHeight = mapNode->first_attribute("tileheight", 0, false);
 
 	mapWidth = (unsigned int)strtol(attrWidth->value(), 0, 10);
 	mapHeight = (unsigned int)strtol(attrHeight->value(), 0, 10);
+	tileWidth = (unsigned int)strtol(attrTileWidth->value(), 0, 10);
+	tileHeight = (unsigned int)strtol(attrTileHeight->value(), 0, 10);
+
+	int totalCols = mapWidth;
+	int totalRows = mapHeight;
+
+	// Load the tilesets.
+	std::vector<Tileset> tilesets;
+	LoadTilesets(mapNode, tilesets);
 
 	// Run over each layer and compress them.
 	rapidxml::xml_node<>* layerNode = mapNode->first_node("layer", 0, false);
-
 	while(layerNode != 0)
 	{
+		// Load the data node.
 		rapidxml::xml_node<>* dataNode = layerNode->first_node("data", 0, false);
+
+		// Loop through each tile and give it the proper parameters.
+		rapidxml::xml_node<>* tileNode = dataNode->first_node("tile", 0, false);
+
+		std::vector<rapidxml::xml_node<>*> removeNodes;
+		int currentCol = 0, currentRow = 0;
+		while(tileNode != 0)
+		{
+			// Get our tile GID.
+			rapidxml::xml_attribute<>* attrGID = tileNode->first_attribute("gid", 0, false);
+			unsigned int gid = (unsigned int)strtol(attrGID->value(), 0, 10);
+
+			// If our GID == 0 then we wan to remove it.
+			if(gid == 0)
+			{
+				removeNodes.push_back(tileNode);
+			}
+			else
+			{
+				// Modify the tile node to have an attribute describing which tileset it uses.
+				char* tilesetID = int2char(&mapDoc, GetTilesetID(tilesets, gid));
+				rapidxml::xml_attribute<>* attrTilesetID = mapDoc.allocate_attribute("tileset", tilesetID, 0, 0);
+
+				// Set the col and row to the current col and row.
+				char* tileCol = int2char(&mapDoc, currentCol);
+				char* tileRow = int2char(&mapDoc, currentRow);
+				rapidxml::xml_attribute<>* attrCol = mapDoc.allocate_attribute("col", tileCol, 0, 0);
+				rapidxml::xml_attribute<>* attrRow = mapDoc.allocate_attribute("row", tileRow, 0, 0);
+
+				// Append the attribute on to the node.
+				tileNode->append_attribute(attrTilesetID);
+				tileNode->append_attribute(attrCol);
+				tileNode->append_attribute(attrRow);
+			}
+
+			// Get our next tile node.
+			tileNode = tileNode->next_sibling("tile", 0, false);
+
+			// Increase the counts.
+			currentCol++;
+			if(currentCol >= totalCols)
+			{
+				currentCol = 0;
+				currentRow++;
+			}
+		}
+
+		// Remove the useless nodes where their GID == 0
+		for(int i = 0; i < removeNodes.size(); i++)
+		{
+			dataNode->remove_node(removeNodes[i]);
+		}
 
 		// Get our uncompressed data and remove unneeded items.
 		std::ostringstream oss;

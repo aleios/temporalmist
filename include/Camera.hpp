@@ -18,12 +18,12 @@ public:
 
 	void Update()
 	{
-		viewMatrix = Matrix::CreateTranslation(position.x, position.y, 0) * Matrix::CreateZRotation(rotation);
+		viewMatrix = Matrix::CreateIdentity() * Matrix::CreateZRotation(rotation) * Matrix::CreateTranslation(position.x, position.y, 0);
 	}
 
 	void SetPosition(const Vector2& inPosition)
 	{
-		position = inPosition;
+		position = -inPosition;
 	}
 
 	void SetRotation(float inRotation)

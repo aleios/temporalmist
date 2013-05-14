@@ -1,20 +1,26 @@
-﻿Build started 5/12/2013 11:27:28 PM.
-     1>Project "C:\Users\Alex\Desktop\GameDesign\temporalmist\tools\MapConverter\MapConverter.vcxproj" on node 2 (Build target(s)).
+﻿Build started 5/13/2013 9:33:10 PM.
+     1>Project "D:\TemporalMist\Proper\temporalmist\tools\MapConverter\MapConverter.vcxproj" on node 2 (Build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\MapConverter.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
          main.cpp
-     1>c:\users\alex\desktop\gamedesign\temporalmist\tools\mapconverter\main.cpp(121): warning C4129: '/' : unrecognized character escape sequence
+     1>d:\temporalmist\proper\temporalmist\tools\mapconverter\main.cpp(119): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\temporalmist\proper\temporalmist\tools\mapconverter\main.cpp(123): warning C4018: '>=' : signed/unsigned mismatch
+     1>d:\temporalmist\proper\temporalmist\tools\mapconverter\main.cpp(123): warning C4018: '<=' : signed/unsigned mismatch
+     1>d:\temporalmist\proper\temporalmist\tools\mapconverter\main.cpp(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>d:\temporalmist\proper\temporalmist\tools\mapconverter\main.cpp(244): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\temporalmist\proper\temporalmist\tools\mapconverter\main.cpp(255): warning C4129: '/' : unrecognized character escape sequence
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Alex\Desktop\GameDesign\temporalmist\tools\MapConverter\Debug\MapConverter.exe" /INCREMENTAL /NOLOGO zlib.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Alex\Desktop\GameDesign\temporalmist\tools\MapConverter\Debug\MapConverter.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Alex\Desktop\GameDesign\temporalmist\tools\MapConverter\Debug\MapConverter.lib" /MACHINE:X86 Debug\base64.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\TemporalMist\Proper\temporalmist\tools\MapConverter\Debug\MapConverter.exe" /INCREMENTAL /NOLOGO zlib.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\TemporalMist\Proper\temporalmist\tools\MapConverter\Debug\MapConverter.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\TemporalMist\Proper\temporalmist\tools\MapConverter\Debug\MapConverter.lib" /MACHINE:X86 Debug\base64.obj
          Debug\main.obj
-         MapConverter.vcxproj -> C:\Users\Alex\Desktop\GameDesign\temporalmist\tools\MapConverter\Debug\MapConverter.exe
+         MapConverter.vcxproj -> D:\TemporalMist\Proper\temporalmist\tools\MapConverter\Debug\MapConverter.exe
        FinalizeBuildStatus:
          Deleting file "Debug\MapConverter.unsuccessfulbuild".
          Touching "Debug\MapConverter.lastbuildstate".
-     1>Done Building Project "C:\Users\Alex\Desktop\GameDesign\temporalmist\tools\MapConverter\MapConverter.vcxproj" (Build target(s)).
+     1>Done Building Project "D:\TemporalMist\Proper\temporalmist\tools\MapConverter\MapConverter.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.63
+Time Elapsed 00:00:36.77
