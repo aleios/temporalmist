@@ -75,12 +75,14 @@
   <ItemGroup>
     <ClCompile Include="..\src\base64.cpp" />
     <ClCompile Include="..\src\Game.cpp" />
+    <ClCompile Include="..\src\GameObject.cpp" />
     <ClCompile Include="..\src\GameplayState.cpp" />
     <ClCompile Include="..\src\IndexBufferObject.cpp" />
     <ClCompile Include="..\src\Layer.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\Map.cpp" />
     <ClCompile Include="..\src\Pathfinder.cpp" />
+    <ClCompile Include="..\src\Player.cpp" />
     <ClCompile Include="..\src\Shader.cpp" />
     <ClCompile Include="..\src\StateManager.cpp" />
     <ClCompile Include="..\src\VertexBufferObject.cpp" />
@@ -90,6 +92,7 @@
     <ClInclude Include="..\include\Camera.hpp" />
     <ClInclude Include="..\include\Color.hpp" />
     <ClInclude Include="..\include\Game.hpp" />
+    <ClInclude Include="..\include\GameObject.hpp" />
     <ClInclude Include="..\include\GameplayState.hpp" />
     <ClInclude Include="..\include\GameSettings.hpp" />
     <ClInclude Include="..\include\GameState.hpp" />
@@ -101,6 +104,7 @@
     <ClInclude Include="..\include\Pathfinder.hpp" />
     <ClInclude Include="..\include\Player.hpp" />
     <ClInclude Include="..\include\Quaternion.hpp" />
+    <ClInclude Include="..\include\Rect.hpp" />
     <ClInclude Include="..\include\Shader.hpp" />
     <ClInclude Include="..\include\StateManager.hpp" />
     <ClInclude Include="..\include\Tile.hpp" />

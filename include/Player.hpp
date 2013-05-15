@@ -2,73 +2,24 @@
 #define PLAYER_HPP
 
 #include <SFML/Graphics/Texture.hpp>
-#include <Vector2.hpp>
 
-class Player
+#include <GameObject.hpp>
+
+#include <VertexBufferObject.hpp>
+#include <IndexBufferObject.hpp>
+
+class Player : 
+	public GameObject
 {
 public:
-	Player()
-	{
-	}
+	Player();
+	~Player();
 
-	~Player()
-	{
-	}
+	void Draw();
+	void Update(unsigned int timestep);
 
-	void SetPosition(const Vector2& inPosition, bool inRelative = false)
-	{
-		if(!inRelative)
-			position = inPosition;
-		else
-			position += inPosition;
-	}
-	void SetPosition(float X, float Y, bool inRelative = false)
-	{
-		if(!inRelative)
-		{
-			position.x = X;
-			position.y = Y;
-		}
-		else
-		{
-			position.x += X;
-			position.y += Y;
-		}
-	}
-
-	const Vector2& GetPosition() const
-	{
-		return position;
-	}
-
-	const float GetX() const
-	{
-		return position.x;
-	}
-
-	const float GetY() const
-	{
-		return position.y;
-	}
-
-	void SetVelocity(const Vector2& inVelocity, bool inRelative = false)
-	{
-		velocity = inVelocity;
-	}
-
-	void SetVelocity(float X, float Y, bool inRelative = false)
-	{
-		velocity.x = X;
-		velocity.y = Y;
-	}
-
-	const Vector2& GetVelocity() const
-	{
-		return velocity;
-	}
 private:
 	sf::Texture tex;
-	Vector2 position, velocity;
 };
 
 #endif

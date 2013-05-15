@@ -116,25 +116,7 @@ void GameplayState::OnEvent(const sf::Event& ev)
 
 void GameplayState::Update(unsigned int timestep)
 {
-	// TODO: Make the player speed, gravity, etc. into proper constants.
-	// Update player logic, sounds, etc.
-	player.SetVelocity(Vector2(0, 0));
-	Vector2 playerVelocity = player.GetVelocity();
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		playerVelocity.x = 10;
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-		playerVelocity.x = -10;
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-		playerVelocity.y = -10;
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-		playerVelocity.y = 10;
-
-	// Effect the player velocity by gravity.
-	//playerVelocity.y -= 0.2f;
-
-	// Set the velocity and position.
-	player.SetVelocity(playerVelocity, false);
-	player.SetPosition(playerVelocity, true);
+	player.Update(timestep);
 
 	mainCamera.SetPosition(Vector2(player.GetPosition().x - (settings.windowSettings.width / 2.0f), player.GetPosition().y - (settings.windowSettings.height / 2.0f)));
 
@@ -166,6 +148,7 @@ void GameplayState::Draw(float delta)
 	Matrix playerMatrix = Matrix::CreateIdentity() * Matrix::CreateTranslation(pos.x, pos.y, 0);
 	textureShader.SetParameter("modelMatrix", &playerMatrix[0][0]);
 	
+	player.Draw();
 
 	// TEST
 	vbo.Bind();
