@@ -1,6 +1,6 @@
 #include <Vector2.hpp>
 #include <Rect.hpp>
-
+#include <Matrix.hpp>
 #include <Shader.hpp>
 
 class GameObject
@@ -32,4 +32,5 @@ public:
 protected:
 	Rect AABB;
 	Vector2 Position, Velocity;
+	Matrix Matrix;
 };

@@ -2,6 +2,7 @@
 #include <GL/glew.h>
 #include <SFML/OpenGL.hpp>
 #include <GameplayState.hpp>
+#include <ShaderFactory.hpp>
 
 Game::Game(const GameSettings& inSettings)
 	: settings(inSettings), stateManager(inSettings), quitting(false)
@@ -48,6 +49,9 @@ void Game::Run()
 		std::cout << "GLEW encountered an error.\n";
 	}
 
+	ShaderFactory::Register("basic", "assets/shaders/basic.vert", "assets/shaders/basic.frag");
+	ShaderFactory::Register("textured", "assets/shaders/textured.vert", "assets/shaders/textured.frag");
+
 	// Add the starting state.
 	GameplayState* gstate = new GameplayState();
 	stateManager.AddState(gstate);
@@ -78,6 +82,8 @@ void Game::Run()
 		interpolation = static_cast<float>(timeElapsed + ticks - nextTick) / static_cast<float>(ticks);
 		Draw(interpolation);
 	}
+
+	ShaderFactory::Free();
 }
 
 void Game::Update(unsigned int timestep)

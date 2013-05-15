@@ -84,6 +84,7 @@
     <ClCompile Include="..\src\Pathfinder.cpp" />
     <ClCompile Include="..\src\Player.cpp" />
     <ClCompile Include="..\src\Shader.cpp" />
+    <ClCompile Include="..\src\ShaderFactory.cpp" />
     <ClCompile Include="..\src\StateManager.cpp" />
     <ClCompile Include="..\src\VertexBufferObject.cpp" />
   </ItemGroup>
@@ -106,6 +107,7 @@
     <ClInclude Include="..\include\Quaternion.hpp" />
     <ClInclude Include="..\include\Rect.hpp" />
     <ClInclude Include="..\include\Shader.hpp" />
+    <ClInclude Include="..\include\ShaderFactory.hpp" />
     <ClInclude Include="..\include\StateManager.hpp" />
     <ClInclude Include="..\include\Tile.hpp" />
     <ClInclude Include="..\include\Tileset.hpp" />

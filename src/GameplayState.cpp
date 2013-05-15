@@ -1,8 +1,8 @@
 #include <GameplayState.hpp>
 #include <GL/glew.h>
 #include <SFML/OpenGL.hpp>
-
 #include <Map.hpp>
+#include <ShaderFactory.hpp>
 
 GameplayState::GameplayState()
 {
@@ -29,14 +29,16 @@ void GameplayState::OnCreate(const GameSettings& inSettings)
 	projectionMatrix = Matrix::CreateIdentity() * Matrix::OrthoProjection(0, inSettings.windowSettings.width, inSettings.windowSettings.height, 0, -1, 1);
 
 	// Load the basic shader.
-	basicShader.Load("assets/shaders/basic.vert", "assets/shaders/basic.frag");
-	basicShader.Bind();
-	basicShader.SetParameter("projectionMatrix", &projectionMatrix[0][0]);
+	Shader *shader = ShaderFactory::Get("basic");
+	shader->Bind();
+	shader->SetParameter("projectionMatrix", &projectionMatrix[0][0]);
+	shader->Unbind();
 
 	// Load the texture shader.
-	textureShader.Load("assets/shaders/textured.vert", "assets/shaders/textured.frag");
-	textureShader.Bind();
-	textureShader.SetParameter("projectionMatrix", &projectionMatrix[0][0]);
+	shader = ShaderFactory::Get("textured");
+	shader->Bind();
+	shader->SetParameter("projectionMatrix", &projectionMatrix[0][0]);
+	shader->Unbind();
 
 	// Setup the player with their texture.
 	tex.loadFromFile("assets/textures/player.png");
@@ -127,26 +129,28 @@ void GameplayState::Update(unsigned int timestep)
 void GameplayState::Draw(float delta)
 {
 	// Bind the shader.
-	basicShader.Bind();
+	Shader *shader = ShaderFactory::Get("basic");
+	shader->Bind();
 
 	// Draw vertices to screen.
 	Matrix viewMatrix = mainCamera.GetCameraMatrix();
-	basicShader.SetParameter("viewMatrix", &viewMatrix[0][0]);
+	shader->SetParameter("viewMatrix", &viewMatrix[0][0]);
 	
 	Matrix modelMatrix = Matrix::CreateIdentity() * Matrix::CreateTranslation(64, 64, 0);
-	basicShader.SetParameter("modelMatrix", &modelMatrix[0][0]);
+	shader->SetParameter("modelMatrix", &modelMatrix[0][0]);
 	map.DrawLayer(0);
 	map.DrawLayer(1);
 
-	basicShader.Unbind();
+	shader->Unbind();
 
-	textureShader.Bind();
-	textureShader.SetParameter("viewMatrix", &viewMatrix[0][0]);
+	shader = ShaderFactory::Get("textured");
+	shader->Bind();
+	shader->SetParameter("viewMatrix", &viewMatrix[0][0]);
 
 	sf::Texture::bind(&tex);
 	Vector2 pos = player.GetPosition();
 	Matrix playerMatrix = Matrix::CreateIdentity() * Matrix::CreateTranslation(pos.x, pos.y, 0);
-	textureShader.SetParameter("modelMatrix", &playerMatrix[0][0]);
+	shader->SetParameter("modelMatrix", &playerMatrix[0][0]);
 	
 	player.Draw();
 
@@ -160,7 +164,7 @@ void GameplayState::Draw(float delta)
 
 	// END TEST
 
-	textureShader.Unbind();
+	shader->Unbind();
 
 	/*
 	Matrix otherMatrix = Matrix::CreateIdentity() * Matrix::CreateTranslation(40, 40, 0);

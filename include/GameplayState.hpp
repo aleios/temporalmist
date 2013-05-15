@@ -25,7 +25,6 @@ public:
 private:
 	Camera mainCamera;
 	Matrix projectionMatrix;
-	Shader basicShader, textureShader;
 	GameSettings settings;
 
 	Player player;
