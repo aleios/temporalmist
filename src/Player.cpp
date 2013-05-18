@@ -6,7 +6,7 @@
 Player::Player()
 {
 	// Setup the player with their texture.
-	tex.loadFromFile("assets/textures/player.png");
+	//tex.loadFromFile("assets/textures/player.png");
 }
 
 Player::~Player()
@@ -15,12 +15,15 @@ Player::~Player()
 
 void Player::Draw()
 {
-	// Renderer renderer = Renderer::GetInstance();
-	// renderer.Draw(tex, Position);
+	// Bind the texture.
+	vbo.DrawIndexed(ibo);
 }
 
 void Player::Update(unsigned int timestep)
 {
+	Velocity.x = 0;
+	Velocity.y = 0;
+
 	// Update player logic, sounds, etc.
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		Velocity.x = 10;
@@ -32,7 +35,7 @@ void Player::Update(unsigned int timestep)
 		Velocity.y = 10;
 
 	// Effect the player velocity by gravity.
-	Velocity.y -= 0.2f;
+	//Velocity.y -= 0.2f;
 
 	// Set the velocity and position.
 	SetPosition(Velocity, true);

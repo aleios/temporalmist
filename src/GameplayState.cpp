@@ -76,44 +76,38 @@ void GameplayState::OnCreate(const GameSettings& inSettings)
 	v.texcoords = Vector2(0, 1);
 	verts.push_back(v);
 
-	// Part 2
-	v.pos = Vector3(-texWidth + (texWidth * 2), -texHeight, 0);
-	v.col = Color(255, 0, 0, 255);
-	v.normal = Vector3(1, 1, 1);
-	v.texcoords = Vector2(0, 0);
-	verts.push_back(v);
-
-	v.pos = Vector3(texWidth + (texWidth * 2), -texHeight, 0);
-	v.col = Color(255, 0, 0, 255);
-	v.normal = Vector3(1, 1, 1);
-	v.texcoords = Vector2(1, 0);
-	verts.push_back(v);
-
-	v.pos = Vector3(texWidth + (texWidth * 2), texHeight, 0);
-	v.col = Color(255, 0, 0, 255);
-	v.normal = Vector3(1, 1, 1);
-	v.texcoords = Vector2(1, 1);
-	verts.push_back(v);
-
-	v.pos = Vector3(-texWidth + (texWidth * 2), texHeight, 0);
-	v.col = Color(255, 0, 0, 255);
-	v.normal = Vector3(1, 1, 1);
-	v.texcoords = Vector2(0, 1);
-	verts.push_back(v);
-
 	vbo.SetData(verts);
 
 	std::vector<unsigned short> indices;
 	indices.push_back(0); indices.push_back(1); indices.push_back(2);
 	indices.push_back(0); indices.push_back(3); indices.push_back(2);
-
-	indices.push_back(4); indices.push_back(5); indices.push_back(6);
-	indices.push_back(4); indices.push_back(7); indices.push_back(6);
 	ibo.SetData(indices);
 }
 
 void GameplayState::OnEvent(const sf::Event& ev)
 {
+	if(ev.type == sf::Event::Resized)
+	{
+		// Change the projection matrix.
+		projectionMatrix = Matrix::OrthoProjection(0, ev.size.width, ev.size.height, 0, -1, 1);
+
+		// Update the shaders with the new projection matrix.
+		Shader* shader = ShaderFactory::Get("basic");
+		shader->Bind();
+		shader->SetParameter("projectionMatrix", &projectionMatrix[0][0]);
+
+		shader = ShaderFactory::Get("textured");
+		shader->Bind();
+		shader->SetParameter("projectionMatrix", &projectionMatrix[0][0]);
+		shader->Unbind();
+
+		// Set the viewport.
+		glViewport(0, 0, ev.size.width, ev.size.height);
+
+		// Put the new Width and Height into the settings.
+		settings.windowSettings.width = ev.size.width;
+		settings.windowSettings.height = ev.size.height;
+	}
 }
 
 void GameplayState::Update(unsigned int timestep)
@@ -136,10 +130,6 @@ void GameplayState::Draw(float delta)
 	Matrix viewMatrix = mainCamera.GetCameraMatrix();
 	shader->SetParameter("viewMatrix", &viewMatrix[0][0]);
 	
-	Matrix modelMatrix = Matrix::CreateIdentity() * Matrix::CreateTranslation(64, 64, 0);
-	shader->SetParameter("modelMatrix", &modelMatrix[0][0]);
-	map.DrawLayer(0);
-	map.DrawLayer(1);
 
 	shader->Unbind();
 
@@ -147,18 +137,23 @@ void GameplayState::Draw(float delta)
 	shader->Bind();
 	shader->SetParameter("viewMatrix", &viewMatrix[0][0]);
 
+	Matrix modelMatrix = Matrix::CreateIdentity() * Matrix::CreateTranslation(0, 0, 0);
+	shader->SetParameter("modelMatrix", &modelMatrix[0][0]);
+	map.DrawLayer(0);
+	map.DrawLayer(1);
+
 	sf::Texture::bind(&tex);
 	Vector2 pos = player.GetPosition();
 	Matrix playerMatrix = Matrix::CreateIdentity() * Matrix::CreateTranslation(pos.x, pos.y, 0);
 	shader->SetParameter("modelMatrix", &playerMatrix[0][0]);
-	
-	player.Draw();
+
+	//player.Draw();
 
 	// TEST
 	vbo.Bind();
 	ibo.Bind();
 
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, (GLvoid*)(6 * sizeof(unsigned short)));
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
 
 	vbo.Unbind();
 

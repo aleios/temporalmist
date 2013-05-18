@@ -2,6 +2,10 @@
 #include <Rect.hpp>
 #include <Matrix.hpp>
 #include <Shader.hpp>
+#include <VertexBufferObject.hpp>
+#include <IndexBufferObject.hpp>
+
+#include <SFML/Graphics/Texture.hpp>
 
 class GameObject
 {
@@ -29,8 +33,15 @@ public:
 
 	bool CheckCollision(Rect other);
 
+	const Matrix& GetMatrix() const;
+
 protected:
 	Rect AABB;
 	Vector2 Position, Velocity;
+
+	// Rendering components.
+	sf::Texture Tex;
 	Matrix Matrix;
+	VertexBufferObject vbo;
+	IndexBufferObject ibo;
 };

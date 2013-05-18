@@ -7,8 +7,9 @@
 #include <rapidxml.hpp>
 #include <zlib.h>
 
-#include <Layer.hpp>
 #include <Tileset.hpp>
+
+class Layer;
 
 class Map
 {

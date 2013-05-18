@@ -19,7 +19,7 @@ public:
 	void Update(unsigned int timestep);
 
 private:
-	sf::Texture tex;
+	unsigned int state;
 };
 
 #endif

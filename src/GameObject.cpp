@@ -63,3 +63,8 @@ bool GameObject::CheckCollision(Rect other)
 
 	return false;
 }
+
+const Matrix& GameObject::GetMatrix() const
+{
+	return Matrix::CreateIdentity() * Matrix::CreateTranslation(Position.x, Position.y, 0);
+}

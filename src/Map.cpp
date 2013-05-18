@@ -8,6 +8,8 @@
 #include <cctype>
 #include <base64.h>
 
+#include <Layer.hpp>
+
 Map::Map()
 {
 }
@@ -143,6 +145,8 @@ void Map::Load(const std::string& inFilename)
 	////////////////////
 	rapidxml::xml_node<>* tilesetNode = mapNode->first_node("tileset", 0, false);
 
+	int lastGID = 0;
+	unsigned int currentIndex = 0;
 	while(tilesetNode != 0)
 	{
 		Tileset tileset;
@@ -154,6 +158,7 @@ void Map::Load(const std::string& inFilename)
 		rapidxml::xml_attribute<>* attrTileHeight = tilesetNode->first_attribute("tileheight", 0, false);
 
 		tileset.firstGID = (unsigned int)strtol(attrFirstGID->value(), 0, 10);
+		lastGID = tileset.firstGID;
 		tileset.name = attrName->value();
 		tileset.tileWidth = (unsigned int)strtol(attrTileWidth->value(), 0, 10);
 		tileset.tileHeight = (unsigned int)strtol(attrTileHeight->value(), 0, 10);
@@ -170,8 +175,14 @@ void Map::Load(const std::string& inFilename)
 		// Add the tileset to the vector.
 		tilesets.push_back(tileset);
 
+		if(currentIndex > 0)
+		{
+			tilesets[currentIndex - 1].lastGID = tileset.firstGID;
+		}
+
 		// Move on to the next node (if any).
 		tilesetNode = tilesetNode->next_sibling("tileset", 0, false);
+		currentIndex++;
 	}
 
 
@@ -190,7 +201,7 @@ void Map::Load(const std::string& inFilename)
 		unsigned int layerWidth = (unsigned int)strtol(attrWidth->value(), 0, 10);
 		unsigned int layerHeight = (unsigned int)strtol(attrHeight->value(), 0, 10);
 
-		Layer* layer = new Layer(attrName->value(), layerWidth, layerHeight, tileWidth, tileHeight);
+		Layer* layer = new Layer(this, attrName->value(), layerWidth, layerHeight, tileWidth, tileHeight);
 
 		// Read the data section and all the tiles.
 		rapidxml::xml_node<>* dataNode = layerNode->first_node("data", 0, false);

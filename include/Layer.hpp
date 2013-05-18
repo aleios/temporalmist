@@ -8,6 +8,8 @@
 #include <VertexBufferObject.hpp>
 #include <IndexBufferObject.hpp>
 
+class Map;
+
 struct LayerDesc
 {
 	int start;
@@ -17,7 +19,7 @@ struct LayerDesc
 class Layer
 {
 public:
-	Layer(const std::string inName, int inWidth, int inHeight, int inTileWidth, int inTileHeight);
+	Layer(Map* inParent, const std::string inName, int inWidth, int inHeight, int inTileWidth, int inTileHeight);
 	~Layer();
 
 	const std::string& GetName() const;
@@ -37,6 +39,7 @@ private:
 	IndexBufferObject ibo;
 
 	std::map<int, LayerDesc> layerDesc;
+	Map* parent;
 };
 
 #endif
