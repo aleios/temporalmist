@@ -1,3 +1,6 @@
+#ifndef RECT_HPP
+#define RECT_HPP
+
 #include <Vector2.hpp>
 
 class Rect
@@ -46,3 +49,5 @@ public:
 private:
 	Vector2 Point1, Point2;
 };
+
+#endif

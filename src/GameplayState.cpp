@@ -3,6 +3,7 @@
 #include <SFML/OpenGL.hpp>
 #include <Map.hpp>
 #include <ShaderFactory.hpp>
+#include <LevelManager.hpp>
 
 GameplayState::GameplayState()
 {
@@ -13,7 +14,7 @@ GameplayState::~GameplayState()
 }
 
 sf::Texture tex;
-Map map;
+Player* player;
 
 void GameplayState::OnCreate(const GameSettings& inSettings)
 {
@@ -46,42 +47,15 @@ void GameplayState::OnCreate(const GameSettings& inSettings)
 	int texWidth = (tex.getSize().x / 2);
 	int texHeight = (tex.getSize().y / 2);
 
-	// TODO: Replace this with an actual level manager system.
-	map.Load("assets/maps/test.tmx");
+	// Load Levels.
+	LevelManager* levelManager = LevelManager::GetInstance();
+	levelManager->LoadLevel("assets/maps/test.tmx");
+	
+	levelManager->SetLevel(0);
 
-	std::vector<Vertex> verts;
-	Vertex v;
-
-	v.pos = Vector3(-texWidth, -texHeight, 0);
-	v.col = Color(255, 255, 255, 255);
-	v.normal = Vector3(1, 1, 1);
-	v.texcoords = Vector2(0, 0);
-	verts.push_back(v);
-
-	v.pos = Vector3(texWidth, -texHeight, 0);
-	v.col = Color(255, 255, 255, 255);
-	v.normal = Vector3(1, 1, 1);
-	v.texcoords = Vector2(1, 0);
-	verts.push_back(v);
-
-	v.pos = Vector3(texWidth, texHeight, 0);
-	v.col = Color(255, 255, 255, 255);
-	v.normal = Vector3(1, 1, 1);
-	v.texcoords = Vector2(1, 1);
-	verts.push_back(v);
-
-	v.pos = Vector3(-texWidth, texHeight, 0);
-	v.col = Color(255, 255, 255, 255);
-	v.normal = Vector3(1, 1, 1);
-	v.texcoords = Vector2(0, 1);
-	verts.push_back(v);
-
-	vbo.SetData(verts);
-
-	std::vector<unsigned short> indices;
-	indices.push_back(0); indices.push_back(1); indices.push_back(2);
-	indices.push_back(0); indices.push_back(3); indices.push_back(2);
-	ibo.SetData(indices);
+	// Setup the player.
+	Player* player = new Player("assets/textures/player.png", "assets/animations/player.anim");
+	gameObjects.push_back(player);
 }
 
 void GameplayState::OnEvent(const sf::Event& ev)
@@ -112,9 +86,14 @@ void GameplayState::OnEvent(const sf::Event& ev)
 
 void GameplayState::Update(unsigned int timestep)
 {
-	player.Update(timestep);
+	// Update all Game Objects.
+	auto it = gameObjects.begin(), ite = gameObjects.end();
+	for(; it != ite; ++it)
+	{
+		(*it)->Update(timestep);
+	}
 
-	mainCamera.SetPosition(Vector2(player.GetPosition().x - (settings.windowSettings.width / 2.0f), player.GetPosition().y - (settings.windowSettings.height / 2.0f)));
+	mainCamera.SetPosition(Vector2(gameObjects[0]->GetPosition().x - (settings.windowSettings.width / 2.0f), gameObjects[0]->GetPosition().y - (settings.windowSettings.height / 2.0f)));
 
 	// Update the camera to the proper view matrix.
 	mainCamera.Update();
@@ -122,58 +101,53 @@ void GameplayState::Update(unsigned int timestep)
 
 void GameplayState::Draw(float delta)
 {
-	// Bind the shader.
-	Shader *shader = ShaderFactory::Get("basic");
-	shader->Bind();
-
-	// Draw vertices to screen.
+	// Get the camera matrix.
 	Matrix viewMatrix = mainCamera.GetCameraMatrix();
-	shader->SetParameter("viewMatrix", &viewMatrix[0][0]);
-	
 
-	shader->Unbind();
-
-	shader = ShaderFactory::Get("textured");
+	// Draw all textured objects.
+	Shader* shader = ShaderFactory::Get("textured");
 	shader->Bind();
 	shader->SetParameter("viewMatrix", &viewMatrix[0][0]);
 
+
+	Map& map = LevelManager::GetInstance()->GetCurrentMap();
 	Matrix modelMatrix = Matrix::CreateIdentity() * Matrix::CreateTranslation(0, 0, 0);
 	shader->SetParameter("modelMatrix", &modelMatrix[0][0]);
 	map.DrawLayer(0);
 	map.DrawLayer(1);
 
+	/*
 	sf::Texture::bind(&tex);
-	Vector2 pos = player.GetPosition();
-	Matrix playerMatrix = Matrix::CreateIdentity() * Matrix::CreateTranslation(pos.x, pos.y, 0);
+	Matrix playerMatrix = gameObjects[0]->GetMatrix();
 	shader->SetParameter("modelMatrix", &playerMatrix[0][0]);
+	gameObjects[0]->Draw();
+	*/
 
-	//player.Draw();
-
-	// TEST
-	vbo.Bind();
-	ibo.Bind();
-
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
-
-	vbo.Unbind();
-
-	// END TEST
+	// Draw all game objects.
+	auto it = gameObjects.begin(), ite = gameObjects.end();
+	for(; it != ite; ++it)
+	{
+		Matrix objMatrix = (*it)->GetMatrix();
+		shader->SetParameter("modelMatrix", &objMatrix[0][0]);
+		(*it)->Draw();
+	}
 
 	shader->Unbind();
-
-	/*
-	Matrix otherMatrix = Matrix::CreateIdentity() * Matrix::CreateTranslation(40, 40, 0);
-	basicShader.SetParameter("modelMatrix", &otherMatrix[0][0]);
-	vbo.DrawIndexed(ibo);*/
-
-	//Matrix mapMatrix = Matrix::CreateIdentity() * Matrix::CreateTranslation(10, 10, 0);
-	//basicShader.SetParameter("modelMatrix", &mapMatrix[0][0]);
-	//map.Draw();
-
-	// Unbind the shader.
 }
 
 void GameplayState::OnDestroy()
 {
-	// Unload assets.
+	// Remove all game objects and release memory.
+	for(int i = 0; i < gameObjects.size(); i++)
+	{
+		if(gameObjects[i] != 0)
+			delete gameObjects[i];
+	}
+	gameObjects.clear();
+}
+
+void GameplayState::AddGameObject(GameObject* inObj)
+{
+	if(inObj != 0)
+		gameObjects.push_back(inObj);
 }

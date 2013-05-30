@@ -73,15 +73,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\AnimatedSprite.cpp" />
     <ClCompile Include="..\src\base64.cpp" />
+    <ClCompile Include="..\src\BlockObject.cpp" />
     <ClCompile Include="..\src\Game.cpp" />
     <ClCompile Include="..\src\GameObject.cpp" />
     <ClCompile Include="..\src\GameplayState.cpp" />
     <ClCompile Include="..\src\IndexBufferObject.cpp" />
     <ClCompile Include="..\src\Layer.cpp" />
+    <ClCompile Include="..\src\LevelManager.cpp" />
+    <ClCompile Include="..\src\LightObject.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\Map.cpp" />
     <ClCompile Include="..\src\Pathfinder.cpp" />
+    <ClCompile Include="..\src\PlankObject.cpp" />
     <ClCompile Include="..\src\Player.cpp" />
     <ClCompile Include="..\src\Shader.cpp" />
     <ClCompile Include="..\src\ShaderFactory.cpp" />
@@ -89,7 +94,9 @@
     <ClCompile Include="..\src\VertexBufferObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\AnimatedSprite.hpp" />
     <ClInclude Include="..\include\base64.h" />
+    <ClInclude Include="..\include\BlockObject.hpp" />
     <ClInclude Include="..\include\Camera.hpp" />
     <ClInclude Include="..\include\Color.hpp" />
     <ClInclude Include="..\include\Game.hpp" />
@@ -99,10 +106,13 @@
     <ClInclude Include="..\include\GameState.hpp" />
     <ClInclude Include="..\include\IndexBufferObject.hpp" />
     <ClInclude Include="..\include\Layer.hpp" />
+    <ClInclude Include="..\include\LevelManager.hpp" />
+    <ClInclude Include="..\include\LightObject.hpp" />
     <ClInclude Include="..\include\Map.hpp" />
     <ClInclude Include="..\include\Matrix.hpp" />
     <ClInclude Include="..\include\Path.hpp" />
     <ClInclude Include="..\include\Pathfinder.hpp" />
+    <ClInclude Include="..\include\PlankObject.hpp" />
     <ClInclude Include="..\include\Player.hpp" />
     <ClInclude Include="..\include\Quaternion.hpp" />
     <ClInclude Include="..\include\Rect.hpp" />

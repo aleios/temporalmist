@@ -1,38 +1,80 @@
-﻿Build started 5/18/2013 12:49:11 PM.
-     1>Project "D:\TemporalMist\Proper\temporalmist\TemporalMist\TemporalMist.vcxproj" on node 2 (Build target(s)).
-     1>InitializeBuildStatus:
-         Creating "Debug\TemporalMist.unsuccessfulbuild" because "AlwaysCreate" was specified.
-       ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\src\GameplayState.cpp
+﻿Build started 30/05/2013 3:06:50 PM.
+     1>Project "J:\TemporalMist\temporalmist\TemporalMist\TemporalMist.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\src\AnimatedSprite.cpp ..\src\base64.cpp ..\src\BlockObject.cpp ..\src\Game.cpp ..\src\GameObject.cpp ..\src\GameplayState.cpp ..\src\IndexBufferObject.cpp ..\src\Layer.cpp ..\src\LevelManager.cpp ..\src\LightObject.cpp ..\src\main.cpp ..\src\Map.cpp ..\src\Pathfinder.cpp ..\src\PlankObject.cpp ..\src\Player.cpp ..\src\Shader.cpp ..\src\ShaderFactory.cpp ..\src\StateManager.cpp ..\src\VertexBufferObject.cpp
+         VertexBufferObject.cpp
+         StateManager.cpp
+         ShaderFactory.cpp
+         Shader.cpp
+         Player.cpp
+     1>j:\temporalmist\temporalmist\include\tileset.hpp(35): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
+     1>j:\temporalmist\temporalmist\include\levelmanager.hpp(26): warning C4018: '<' : signed/unsigned mismatch
+         PlankObject.cpp
+         Pathfinder.cpp
+         Map.cpp
+     1>j:\temporalmist\temporalmist\include\tileset.hpp(35): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
+     1>j:\temporalmist\temporalmist\src\map.cpp(113): warning C4018: '<' : signed/unsigned mismatch
+     1>j:\temporalmist\temporalmist\src\map.cpp(284): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
+     1>j:\temporalmist\temporalmist\src\map.cpp(292): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
+     1>j:\temporalmist\temporalmist\src\map.cpp(296): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
+     1>j:\temporalmist\temporalmist\src\map.cpp(328): warning C4018: '>' : signed/unsigned mismatch
+         main.cpp
+         LightObject.cpp
+         LevelManager.cpp
+     1>j:\temporalmist\temporalmist\include\tileset.hpp(35): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
+     1>j:\temporalmist\temporalmist\include\levelmanager.hpp(26): warning C4018: '<' : signed/unsigned mismatch
+         Layer.cpp
+     1>j:\temporalmist\temporalmist\include\tileset.hpp(35): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
+     1>j:\temporalmist\temporalmist\src\layer.cpp(57): warning C4018: '<' : signed/unsigned mismatch
+     1>j:\temporalmist\temporalmist\src\layer.cpp(82): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>j:\temporalmist\temporalmist\src\layer.cpp(88): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>j:\temporalmist\temporalmist\src\layer.cpp(88): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
+     1>j:\temporalmist\temporalmist\src\layer.cpp(94): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
+     1>j:\temporalmist\temporalmist\src\layer.cpp(100): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
+     1>j:\temporalmist\temporalmist\src\layer.cpp(100): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>j:\temporalmist\temporalmist\src\layer.cpp(113): warning C4018: '>=' : signed/unsigned mismatch
+     1>j:\temporalmist\temporalmist\src\layer.cpp(145): warning C4018: '<' : signed/unsigned mismatch
+         IndexBufferObject.cpp
          GameplayState.cpp
-     1>d:\temporalmist\proper\temporalmist\include\tileset.hpp(35): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
-     1>d:\temporalmist\proper\temporalmist\src\gameplaystate.cpp(29): warning C4244: 'argument' : conversion from 'const unsigned int' to 'float', possible loss of data
-     1>d:\temporalmist\proper\temporalmist\src\gameplaystate.cpp(55): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\temporalmist\proper\temporalmist\src\gameplaystate.cpp(61): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\temporalmist\proper\temporalmist\src\gameplaystate.cpp(67): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\temporalmist\proper\temporalmist\src\gameplaystate.cpp(73): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\temporalmist\proper\temporalmist\src\gameplaystate.cpp(92): warning C4244: 'argument' : conversion from 'const unsigned int' to 'float', possible loss of data
+     1>j:\temporalmist\temporalmist\include\tileset.hpp(35): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
+     1>j:\temporalmist\temporalmist\include\levelmanager.hpp(26): warning C4018: '<' : signed/unsigned mismatch
+     1>j:\temporalmist\temporalmist\src\gameplaystate.cpp(30): warning C4244: 'argument' : conversion from 'const unsigned int' to 'float', possible loss of data
+     1>j:\temporalmist\temporalmist\src\gameplaystate.cpp(66): warning C4244: 'argument' : conversion from 'const unsigned int' to 'float', possible loss of data
+     1>j:\temporalmist\temporalmist\src\gameplaystate.cpp(141): warning C4018: '<' : signed/unsigned mismatch
+         GameObject.cpp
+         Game.cpp
+         BlockObject.cpp
+         base64.cpp
+         AnimatedSprite.cpp
+     1>j:\temporalmist\temporalmist\src\animatedsprite.cpp(91): warning C4018: '<' : signed/unsigned mismatch
+     1>j:\temporalmist\temporalmist\src\animatedsprite.cpp(110): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
+     1>j:\temporalmist\temporalmist\src\animatedsprite.cpp(116): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
+     1>j:\temporalmist\temporalmist\src\animatedsprite.cpp(122): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
+     1>j:\temporalmist\temporalmist\src\animatedsprite.cpp(196): warning C4018: '>' : signed/unsigned mismatch
+         Generating Code...
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\TemporalMist\Proper\temporalmist\Debug\TemporalMist.exe" /INCREMENTAL /NOLOGO zlib.lib "sfml-main-d.lib" "sfml-system-d.lib" "sfml-window-d.lib" "sfml-graphics-d.lib" OPENGL32.lib GLU32.lib glew32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\TemporalMist\Proper\temporalmist\Debug\TemporalMist.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\TemporalMist\Proper\temporalmist\Debug\TemporalMist.lib" /MACHINE:X86 Debug\base64.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"J:\TemporalMist\temporalmist\Debug\TemporalMist.exe" /INCREMENTAL /NOLOGO zlib.lib "sfml-main-d.lib" "sfml-system-d.lib" "sfml-window-d.lib" "sfml-graphics-d.lib" OPENGL32.lib GLU32.lib glew32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"J:\TemporalMist\temporalmist\Debug\TemporalMist.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"J:\TemporalMist\temporalmist\Debug\TemporalMist.lib" /MACHINE:X86 Debug\AnimatedSprite.obj
+         Debug\base64.obj
+         Debug\BlockObject.obj
          Debug\Game.obj
          Debug\GameObject.obj
          Debug\GameplayState.obj
          Debug\IndexBufferObject.obj
          Debug\Layer.obj
+         Debug\LevelManager.obj
+         Debug\LightObject.obj
          Debug\main.obj
          Debug\Map.obj
          Debug\Pathfinder.obj
+         Debug\PlankObject.obj
          Debug\Player.obj
          Debug\Shader.obj
          Debug\ShaderFactory.obj
          Debug\StateManager.obj
          Debug\VertexBufferObject.obj
-         TemporalMist.vcxproj -> D:\TemporalMist\Proper\temporalmist\Debug\TemporalMist.exe
-       FinalizeBuildStatus:
-         Deleting file "Debug\TemporalMist.unsuccessfulbuild".
-         Touching "Debug\TemporalMist.lastbuildstate".
-     1>Done Building Project "D:\TemporalMist\Proper\temporalmist\TemporalMist\TemporalMist.vcxproj" (Build target(s)).
+         TemporalMist.vcxproj -> J:\TemporalMist\temporalmist\Debug\TemporalMist.exe
+     1>Done Building Project "J:\TemporalMist\temporalmist\TemporalMist\TemporalMist.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:25.57
+Time Elapsed 00:03:03.23

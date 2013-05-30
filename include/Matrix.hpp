@@ -377,7 +377,7 @@ public:
 				2.0f * nq.x * nq.y + 2.0f * nq.z * nq.w, 1.0f - 2.0f * nq.x * nq.x - 2.0f * nq.z * nq.z, 2.0f * nq.y * nq.z - 2.0f * nq.x * nq.w, 0.0f,
 				2.0f * nq.x * nq.z - 2.0f * nq.y * nq.w, 2.0f * nq.y * nq.z + 2.0f * nq.x * nq.w, 1.0f - 2.0f * nq.x * nq.x - 2.0f * nq.y * nq.y, 0.0f,
 				0.0f, 0.0f, 0.0f, 1.0f);
-		return m ;
+		return m;
 	}
 
 	////

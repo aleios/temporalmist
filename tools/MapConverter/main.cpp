@@ -11,11 +11,19 @@
 #include "base64.h"
 
 unsigned int mapWidth, mapHeight, tileWidth, tileHeight;
+int totalCols = 0, totalRows = 0;
 
 struct Tileset
 {
+	std::string name;
 	int gidstart;
 	int gidend;
+};
+
+struct ControlTile
+{
+	int id;
+	int row, col;
 };
 
 std::string CompressLayer(std::string layerData)
@@ -78,6 +86,7 @@ void LoadTilesets(rapidxml::xml_node<>* mapNode, std::vector<Tileset>& tilesets)
 	{
 		// Get the size of each tile.
 		rapidxml::xml_attribute<>* attrGID = tilesetNode->first_attribute("firstgid", 0, false);
+		rapidxml::xml_attribute<>* attrName = tilesetNode->first_attribute("name", 0, false);
 		rapidxml::xml_attribute<>* attrTilewidth = tilesetNode->first_attribute("tilewidth", 0, false);
 		rapidxml::xml_attribute<>* attrTileheight = tilesetNode->first_attribute("tilewidth", 0, false);
 
@@ -101,6 +110,7 @@ void LoadTilesets(rapidxml::xml_node<>* mapNode, std::vector<Tileset>& tilesets)
 
 		// Add the tileset to the vector.
 		Tileset tileset;
+		tileset.name = attrName->value();
 		tileset.gidstart = firstGID;
 		tileset.gidend = (firstGID + total) - 1;
 
@@ -127,10 +137,95 @@ unsigned int GetTilesetID(std::vector<Tileset>& tilesets, unsigned int gid)
 	return 0;
 }
 
-char* int2char(rapidxml::xml_document<>* doc, int value) {
+char* int2char(rapidxml::xml_document<>* doc, int value) 
+{
     char tmpval[64];
     sprintf(tmpval,"%i",value);
     return doc->allocate_string(tmpval);
+}
+
+std::string StringToLower(const std::string& str)
+{
+	std::string tmp = str;
+	std::transform(tmp.begin(), tmp.end(), tmp.begin(), ::tolower);
+	return tmp;
+}
+
+rapidxml::xml_node<>* HandleControlLayer(rapidxml::xml_node<>* layerNode, const std::vector<Tileset>& tilesets)
+{
+	rapidxml::xml_node<>* dataNode = layerNode->first_node("data", 0, false);
+
+	// Find our control layers tileset ids.
+	int sid = 0, eid = 0, numid = 0;
+	for(int i = 0; i < tilesets.size(); i++)
+	{
+		if(StringToLower(tilesets[i].name) == "control")
+		{
+			sid = tilesets[i].gidstart;
+			eid = tilesets[i].gidend;
+
+			numid = eid - sid;
+			break;
+		}
+	}
+	
+	// Grab each tile and find out which ones are which.
+	rapidxml::xml_node<>* tileNode = dataNode->first_node("tile", 0, false);
+	int currentCol = 0, currentRow = 0;
+	std::vector<ControlTile> controlTiles;
+	while(tileNode != 0)
+	{
+		rapidxml::xml_attribute<>* attrGID = tileNode->first_attribute("gid", 0, false);
+		unsigned int gid = (unsigned int)strtol(attrGID->value(), 0, 10);
+
+		if(gid != 0)
+		{
+			ControlTile tile;
+			tile.col = currentCol;
+			tile.row = currentRow;
+			tile.id = (((eid) * (gid - sid)) / (eid - sid));
+			controlTiles.push_back(tile);
+		}
+
+		tileNode = tileNode->next_sibling("tile", 0, false);
+
+		// Increase the counts.
+		currentCol++;
+		if(currentCol >= totalCols)
+		{
+			currentCol = 0;
+			currentRow++;
+		}
+	}
+
+	// Get the next sibling before we delete this node.
+	rapidxml::xml_node<>* returnNode = layerNode->next_sibling("layer", 0, false);
+
+	// Remove the control layer from the layers.
+	rapidxml::xml_node<>* mapNode = layerNode->parent();
+	mapNode->remove_node(layerNode);
+
+	// Put the tiles of the control layer in their own contained set.
+	rapidxml::xml_document<>* docNode = mapNode->document();
+
+	rapidxml::xml_node<>* controlNode = docNode->allocate_node(rapidxml::node_element, "control");
+	mapNode->append_node(controlNode);
+
+	for(int i = 0; i < controlTiles.size(); i++)
+	{
+		rapidxml::xml_node<>* controlTileNode = docNode->allocate_node(rapidxml::node_element, "tile");
+		rapidxml::xml_attribute<>* attrCol = docNode->allocate_attribute("col", int2char(docNode, controlTiles[i].col));
+		rapidxml::xml_attribute<>* attrRow = docNode->allocate_attribute("row", int2char(docNode, controlTiles[i].row));
+		rapidxml::xml_attribute<>* attrID = docNode->allocate_attribute("id", int2char(docNode, controlTiles[i].id));
+
+		// Append all the nodes and attributes.
+		controlTileNode->append_attribute(attrCol);
+		controlTileNode->append_attribute(attrRow);
+		controlTileNode->append_attribute(attrID);
+		controlNode->append_node(controlTileNode);
+	}
+
+	return returnNode;
 }
 
 int main(int argc, char** argv)
@@ -180,8 +275,8 @@ int main(int argc, char** argv)
 	tileWidth = (unsigned int)strtol(attrTileWidth->value(), 0, 10);
 	tileHeight = (unsigned int)strtol(attrTileHeight->value(), 0, 10);
 
-	int totalCols = mapWidth;
-	int totalRows = mapHeight;
+	totalCols = mapWidth;
+	totalRows = mapHeight;
 
 	// Load the tilesets.
 	std::vector<Tileset> tilesets;
@@ -189,83 +284,95 @@ int main(int argc, char** argv)
 
 	// Run over each layer and compress them.
 	rapidxml::xml_node<>* layerNode = mapNode->first_node("layer", 0, false);
+	bool gotControl = false;
 	while(layerNode != 0)
 	{
-		// Load the data node.
-		rapidxml::xml_node<>* dataNode = layerNode->first_node("data", 0, false);
-
-		// Loop through each tile and give it the proper parameters.
-		rapidxml::xml_node<>* tileNode = dataNode->first_node("tile", 0, false);
-
-		std::vector<rapidxml::xml_node<>*> removeNodes;
-		int currentCol = 0, currentRow = 0;
-		while(tileNode != 0)
-		{
-			// Get our tile GID.
-			rapidxml::xml_attribute<>* attrGID = tileNode->first_attribute("gid", 0, false);
-			unsigned int gid = (unsigned int)strtol(attrGID->value(), 0, 10);
-
-			// If our GID == 0 then we wan to remove it.
-			if(gid == 0)
-			{
-				removeNodes.push_back(tileNode);
-			}
-			else
-			{
-				// Modify the tile node to have an attribute describing which tileset it uses.
-				char* tilesetID = int2char(&mapDoc, GetTilesetID(tilesets, gid));
-				rapidxml::xml_attribute<>* attrTilesetID = mapDoc.allocate_attribute("tileset", tilesetID, 0, 0);
-
-				// Set the col and row to the current col and row.
-				char* tileCol = int2char(&mapDoc, currentCol);
-				char* tileRow = int2char(&mapDoc, currentRow);
-				rapidxml::xml_attribute<>* attrCol = mapDoc.allocate_attribute("col", tileCol, 0, 0);
-				rapidxml::xml_attribute<>* attrRow = mapDoc.allocate_attribute("row", tileRow, 0, 0);
-
-				// Append the attribute on to the node.
-				tileNode->append_attribute(attrTilesetID);
-				tileNode->append_attribute(attrCol);
-				tileNode->append_attribute(attrRow);
-			}
-
-			// Get our next tile node.
-			tileNode = tileNode->next_sibling("tile", 0, false);
-
-			// Increase the counts.
-			currentCol++;
-			if(currentCol >= totalCols)
-			{
-				currentCol = 0;
-				currentRow++;
-			}
-		}
-
-		// Remove the useless nodes where their GID == 0
-		for(int i = 0; i < removeNodes.size(); i++)
-		{
-			dataNode->remove_node(removeNodes[i]);
-		}
-
-		// Get our uncompressed data and remove unneeded items.
-		std::ostringstream oss;
-		oss << (*dataNode);
+		rapidxml::xml_attribute<>* attrName = layerNode->first_attribute("name", 0, false);
 		
-		// Find the unwated <data> tags.
-		std::string uncompressed = oss.str();
-		std::regex e("<\/?!?(data)[^>]*>");
-		uncompressed = std::regex_replace(uncompressed, e, "");
+		// If this is the control layer.
+		if(gotControl == false && StringToLower(attrName->value()) == "control")
+		{
+			layerNode = HandleControlLayer(layerNode, tilesets);
+			gotControl = true;
+		}
+		else // Otherwise load it like a normal layer.
+		{
+			// Load the data node.
+			rapidxml::xml_node<>* dataNode = layerNode->first_node("data", 0, false);
 
-		// Start compression of the data.
-		std::string compressed = CompressLayer(uncompressed);
-		compressed.push_back('\0');
+			// Loop through each tile and give it the proper parameters.
+			rapidxml::xml_node<>* tileNode = dataNode->first_node("tile", 0, false);
 
-		// Replace the nodes with their compressed form.
-		dataNode->remove_all_nodes();
-		char* cStr = mapDoc.allocate_string(compressed.c_str(), compressed.size());
-		dataNode->value(cStr);
+			std::vector<rapidxml::xml_node<>*> removeNodes;
+			int currentCol = 0, currentRow = 0;
+			while(tileNode != 0)
+			{
+				// Get our tile GID.
+				rapidxml::xml_attribute<>* attrGID = tileNode->first_attribute("gid", 0, false);
+				unsigned int gid = (unsigned int)strtol(attrGID->value(), 0, 10);
 
-		// Move to the next layer for processing.
-		layerNode = layerNode->next_sibling("layer", 0, false);
+				// If our GID == 0 then we wan to remove it.
+				if(gid == 0)
+				{
+					removeNodes.push_back(tileNode);
+				}
+				else
+				{
+					// Modify the tile node to have an attribute describing which tileset it uses.
+					char* tilesetID = int2char(&mapDoc, GetTilesetID(tilesets, gid));
+					rapidxml::xml_attribute<>* attrTilesetID = mapDoc.allocate_attribute("tileset", tilesetID, 0, 0);
+
+					// Set the col and row to the current col and row.
+					char* tileCol = int2char(&mapDoc, currentCol);
+					char* tileRow = int2char(&mapDoc, currentRow);
+					rapidxml::xml_attribute<>* attrCol = mapDoc.allocate_attribute("col", tileCol, 0, 0);
+					rapidxml::xml_attribute<>* attrRow = mapDoc.allocate_attribute("row", tileRow, 0, 0);
+
+					// Append the attribute on to the node.
+					tileNode->append_attribute(attrTilesetID);
+					tileNode->append_attribute(attrCol);
+					tileNode->append_attribute(attrRow);
+				}
+
+				// Get our next tile node.
+				tileNode = tileNode->next_sibling("tile", 0, false);
+
+				// Increase the counts.
+				currentCol++;
+				if(currentCol >= totalCols)
+				{
+					currentCol = 0;
+					currentRow++;
+				}
+			}
+
+			// Remove the useless nodes where their GID == 0
+			for(int i = 0; i < removeNodes.size(); i++)
+			{
+				dataNode->remove_node(removeNodes[i]);
+			}
+
+			// Get our uncompressed data and remove unneeded items.
+			std::ostringstream oss;
+			oss << (*dataNode);
+		
+			// Find the unwated <data> tags.
+			std::string uncompressed = oss.str();
+			std::regex e("<\/?!?(data)[^>]*>");
+			uncompressed = std::regex_replace(uncompressed, e, "");
+
+			// Start compression of the data.
+			std::string compressed = CompressLayer(uncompressed);
+			compressed.push_back('\0');
+
+			// Replace the nodes with their compressed form.
+			dataNode->remove_all_nodes();
+			char* cStr = mapDoc.allocate_string(compressed.c_str(), compressed.size());
+			dataNode->value(cStr);
+
+			// Move to the next layer for processing.
+			layerNode = layerNode->next_sibling("layer", 0, false);
+		}
 	}
 	
 	// Write the new map to file.

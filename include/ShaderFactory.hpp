@@ -1,3 +1,6 @@
+#ifndef SHADERFACTORY_HPP
+#define SHADERFACTORY_HPP
+
 #include <Shader.hpp>
 #include <map>
 
@@ -12,3 +15,5 @@ public:
 
 	static void Free();
 };
+
+#endif

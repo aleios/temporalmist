@@ -8,18 +8,26 @@
 #include <VertexBufferObject.hpp>
 #include <IndexBufferObject.hpp>
 
+enum class PlayerState 
+{
+	IDLE,
+	WALKLEFT,
+	WALKRIGHT,
+	JUMP,
+	FALLING
+};
+
 class Player : 
 	public GameObject
 {
 public:
-	Player();
+	Player(const std::string& inTexFilename, const std::string& inAnimFilename = "");
 	~Player();
 
 	void Draw();
 	void Update(unsigned int timestep);
-
 private:
-	unsigned int state;
+	PlayerState state;
 };
 
 #endif

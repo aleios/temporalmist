@@ -139,7 +139,6 @@ void Layer::UpdateVBO()
 
 void Layer::Draw()
 {
-	//vbo.DrawIndexed(ibo);
 	vbo.Bind();
 	ibo.Bind();
 

@@ -22,14 +22,14 @@ public:
 	void Update(unsigned int timestep);
 	void Draw(float delta);
 	void OnDestroy();
+
+	void AddGameObject(GameObject* inObj);
 private:
 	Camera mainCamera;
 	Matrix projectionMatrix;
 	GameSettings settings;
 
-	Player player;
-	VertexBufferObject vbo;
-	IndexBufferObject ibo;
+	std::vector<GameObject*> gameObjects;
 };
 
 #endif

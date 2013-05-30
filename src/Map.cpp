@@ -9,12 +9,16 @@
 #include <base64.h>
 
 #include <Layer.hpp>
+#include <GameplayState.hpp>
+#include <BlockObject.hpp>
+#include <PlankObject.hpp>
 
 Map::Map()
 {
 }
 
-Map::Map(const std::string& inFilename)
+Map::Map(GameplayState* inParent, const std::string& inFilename)
+	: parent(inParent)
 {
 	Load(inFilename);
 }
@@ -243,6 +247,70 @@ void Map::Load(const std::string& inFilename)
 
 		// Get the next layer node (if any).
 		layerNode = layerNode->next_sibling("layer", 0, false);
+	}
+
+
+	////////////////////
+	// Control Layer
+	////////////////////
+	rapidxml::xml_node<>* controlNode = mapNode->first_node("control", 0, false);
+
+	rapidxml::xml_node<>* controlTileNode = controlNode->first_node("tile", 0, false);
+	while(controlTileNode != 0)
+	{
+		// Grab the attributes of the control tile.
+		rapidxml::xml_attribute<>* attrCol = controlTileNode->first_attribute("col", 0, false);
+		rapidxml::xml_attribute<>* attrRow = controlTileNode->first_attribute("row", 0, false);
+		rapidxml::xml_attribute<>* attrID = controlTileNode->first_attribute("id", 0, false);
+
+		unsigned int col = (unsigned int)strtol(attrCol->value(), 0, 10);
+		unsigned int row = (unsigned int)strtol(attrRow->value(), 0, 10);
+		unsigned int id = (unsigned int)strtol(attrID->value(), 0, 10);
+
+		// Find the approiate place for the control tile.
+		/*
+			0 - Collision Tile.
+			1 - Item
+			2 - Exit
+			3 - Player Spawn
+			4 - Enemy Spawn
+			5 - Block Spawn
+			6 - Plank Spawn
+		*/
+
+			switch(id)
+			{
+			case 0: // Collision
+				collisionTiles.push_back(Rect(col * tileWidth, row * tileHeight, (col * tileWidth) + tileWidth, (row * tileHeight) + tileHeight));
+				break;
+
+			case 1: // Item
+				// TODO: Add flashlight...
+				break;
+
+			case 2: // Exit
+				exitTiles.push_back(Rect(col * tileWidth, row * tileHeight, (col * tileWidth) + tileWidth, (row * tileHeight) + tileHeight));
+				break;
+
+			case 3: // Player Spawn
+				playerStart = Vector2(col * tileWidth, row * tileHeight);
+				break;
+
+			case 4: // Enemy Spawn
+				//parent->AddGameObject(new Enemy());
+				break;
+
+			case 5: // Block Spawn
+				parent->AddGameObject(new BlockObject("assets/textures/block.png"));
+				break;
+
+			case 6: // Plank Spawn
+				parent->AddGameObject(new PlankObject("assets/textures/plank.png"));
+				break;
+			}
+
+		// Grab the next control tile.
+		controlTileNode = controlTileNode->next_sibling("tile", 0, false);
 	}
 }
 

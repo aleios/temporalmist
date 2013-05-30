@@ -49,11 +49,17 @@
     <Filter Include="Source Files\Game">
       <UniqueIdentifier>{bda359da-fe7c-4912-b909-5b07aee6979a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\StateManager\States">
+    <Filter Include="Header Files\Game\States">
+      <UniqueIdentifier>{4a6b0780-a4b5-4442-8a22-db9f657aa1fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\States">
       <UniqueIdentifier>{89186bd9-5e41-4a30-a010-9cc5c5a818d2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\StateManager\States">
-      <UniqueIdentifier>{4a6b0780-a4b5-4442-8a22-db9f657aa1fd}</UniqueIdentifier>
+    <Filter Include="Header Files\Game\Objects">
+      <UniqueIdentifier>{9bb8964d-69de-4710-8f18-0cd238a415c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Objects">
+      <UniqueIdentifier>{5e19fd26-00c8-4518-815d-c388d4eac855}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -61,7 +67,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GameplayState.cpp">
-      <Filter>Source Files\StateManager\States</Filter>
+      <Filter>Source Files\Game\States</Filter>
     </ClCompile>
     <ClCompile Include="..\src\StateManager.cpp">
       <Filter>Source Files\StateManager</Filter>
@@ -93,18 +99,30 @@
     <ClCompile Include="..\src\GameObject.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Player.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\ShaderFactory.cpp">
       <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\AnimatedSprite.cpp">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\BlockObject.cpp">
+      <Filter>Source Files\Game\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Player.cpp">
+      <Filter>Source Files\Game\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\PlankObject.cpp">
+      <Filter>Source Files\Game\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LevelManager.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LightObject.cpp">
+      <Filter>Source Files\Game\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Camera.hpp">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Player.hpp">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Layer.hpp">
@@ -141,10 +159,10 @@
       <Filter>Header Files\StateManager</Filter>
     </ClInclude>
     <ClInclude Include="..\include\GameplayState.hpp">
-      <Filter>Header Files\StateManager\States</Filter>
+      <Filter>Header Files\Game\States</Filter>
     </ClInclude>
     <ClInclude Include="..\include\GameState.hpp">
-      <Filter>Header Files\StateManager\States</Filter>
+      <Filter>Header Files\Game\States</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Game.hpp">
       <Filter>Header Files\Game</Filter>
@@ -173,11 +191,29 @@
     <ClInclude Include="..\include\GameObject.hpp">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Rect.hpp">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\ShaderFactory.hpp">
       <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\AnimatedSprite.hpp">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Player.hpp">
+      <Filter>Header Files\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\BlockObject.hpp">
+      <Filter>Header Files\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\PlankObject.hpp">
+      <Filter>Header Files\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Rect.hpp">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LevelManager.hpp">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LightObject.hpp">
+      <Filter>Header Files\Game\Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

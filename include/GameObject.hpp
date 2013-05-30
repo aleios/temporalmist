@@ -1,30 +1,31 @@
+#ifndef GAMEOBJECT_HPP
+#define GAMEOBJECT_HPP
+
 #include <Vector2.hpp>
 #include <Rect.hpp>
 #include <Matrix.hpp>
-#include <Shader.hpp>
-#include <VertexBufferObject.hpp>
-#include <IndexBufferObject.hpp>
 
-#include <SFML/Graphics/Texture.hpp>
+#include <Shader.hpp>
+#include <AnimatedSprite.hpp>
 
 class GameObject
 {
 public:
-	GameObject();
+	GameObject(const std::string& inTexFilename, const std::string& inAnimFilename = "");
 	~GameObject();
 
 	virtual void Draw() = 0;
 	virtual void Update(unsigned int timestep) = 0;
 
 	void SetPosition(float x, float y, bool relative = false);
-	void SetPosition(Vector2 position, bool relative = false) { SetPosition(position.x, position.y, relative); }
-	const Vector2 &GetPosition() { return Position; }
-	const float GetX() { return Position.x; }
-	const float GetY() { return Position.y; }
+	void SetPosition(Vector2 inPosition, bool relative = false) { SetPosition(inPosition.x, inPosition.y, relative); }
+	const Vector2 &GetPosition() { return position; }
+	const float GetX() { return position.x; }
+	const float GetY() { return position.y; }
 
 	void SetVelocity(float x, float y, bool relative = false);
-	void SetVelocity(Vector2 velocity, bool relative = false) { SetVelocity(velocity.x, velocity.y, relative); }
-	const Vector2 &GetVelocity() { return Velocity; }
+	void SetVelocity(Vector2 inVelocity, bool relative = false) { SetVelocity(inVelocity.x, inVelocity.y, relative); }
+	const Vector2 &GetVelocity() { return velocity; }
 
 	void SetAABB(float x1, float y1, float x2, float y2);
 	void SetAABB(Vector2 p1, Vector2 p2) { SetAABB(p1.x, p1.y, p2.x, p2.y); }
@@ -37,11 +38,10 @@ public:
 
 protected:
 	Rect AABB;
-	Vector2 Position, Velocity;
+	Vector2 position, velocity;
 
 	// Rendering components.
-	sf::Texture Tex;
-	Matrix Matrix;
-	VertexBufferObject vbo;
-	IndexBufferObject ibo;
+	AnimatedSprite sprite;
 };
+
+#endif

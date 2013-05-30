@@ -8,14 +8,16 @@
 #include <zlib.h>
 
 #include <Tileset.hpp>
+#include <Rect.hpp>
 
 class Layer;
+class GameplayState;
 
 class Map
 {
 public:
 	Map();
-	Map(const std::string& inFilename);
+	Map(GameplayState* inParent, const std::string& inFilename);
 	~Map();
 
 	void Load(const std::string& inFilename);
@@ -25,12 +27,16 @@ public:
 
 	std::vector<Layer*> layers;
 	std::vector<Tileset> tilesets;
+
+	std::vector<Rect> collisionTiles, exitTiles;
 private:
 	rapidxml::xml_document<> mapXML;
 
 	std::string UncompressData(std::string data);
 
 	unsigned int width, height, tileWidth, tileHeight;
+	GameplayState* parent;
+	Vector2 playerStart;
 };
 
 #endif

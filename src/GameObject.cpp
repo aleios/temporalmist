@@ -1,6 +1,7 @@
 #include <GameObject.hpp>
 
-GameObject::GameObject()
+GameObject::GameObject(const std::string& inTexFilename, const std::string& inAnimFilename)
+	: sprite(inTexFilename, inAnimFilename)
 {
 }
 
@@ -12,13 +13,13 @@ void GameObject::SetPosition(float x, float y, bool relative)
 {
 	if (relative)
 	{
-		Position.x += x;
-		Position.y += y;
+		position.x += x;
+		position.y += y;
 	}
 	else
 	{
-		Position.x = x;
-		Position.y = y;
+		position.x = x;
+		position.y = y;
 	}
 }
 
@@ -26,13 +27,13 @@ void GameObject::SetVelocity(float x, float y, bool relative)
 {
 	if (relative)
 	{
-		Velocity.x += x;
-		Velocity.y += y;
+		velocity.x += x;
+		velocity.y += y;
 	}
 	else
 	{
-		Velocity.x = x;
-		Velocity.y = y;
+		velocity.x = x;
+		velocity.y = y;
 	}
 }
 
@@ -66,5 +67,5 @@ bool GameObject::CheckCollision(Rect other)
 
 const Matrix& GameObject::GetMatrix() const
 {
-	return Matrix::CreateIdentity() * Matrix::CreateTranslation(Position.x, Position.y, 0);
+	return Matrix::CreateIdentity() * Matrix::CreateTranslation(position.x, position.y, 0);
 }
